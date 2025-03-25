@@ -2,14 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import { GlobalProvider } from "./context/global-context";
 import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
 import { createXRStore, XR } from "@react-three/xr";
-import Gun from "./components/gun";
-import Bullets from "./components/bullets";
-import Target from "./components/target";
-import Score from "./components/score";
 
 const xrStore = createXRStore({
   controller: {
-    right: Gun,
+    
   },
 });
 
@@ -25,15 +21,10 @@ export default function App() {
           }}
         >
           <color args={[0x808080]} attach={"background"} />
-          <PerspectiveCamera makeDefault position={[0, 1.6, 2]} fov={75} />
+          <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
           <Environment preset="warehouse" />
-          <Gltf src="/Structure.glb" />
+          <Gltf src="/a_map_main_fix.glb" />
           <XR store={xrStore} />
-          <Bullets />
-          <Target targetIdx={0} />
-          <Target targetIdx={1} />
-          <Target targetIdx={2} />
-          <Score />
         </Canvas>
         <div
           style={{
