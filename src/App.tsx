@@ -23,7 +23,7 @@ export default function App() {
           <color args={[0x808080]} attach={"background"} />
           <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
           <Environment preset="warehouse" />
-          <Gltf src="/a_map_main_fix.glb" />
+          <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />
           <XR store={xrStore} />
         </Canvas>
         <div
