@@ -27,7 +27,7 @@ export default function App() {
           <color args={[0x808080]} attach={"background"} />
           <PerspectiveCamera makeDefault position={[0, 1.6, 2]} fov={75} />
           <Environment preset="warehouse" />
-          <Gltf src="/spacestation.glb" />
+          <Gltf src="/a_map_main_fix.glb" />
           <XR store={xrStore} />
           <Bullets />
           <Target targetIdx={0} />
