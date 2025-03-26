@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, Gltf } from "@react-three/drei";
+import { Gltf } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { GlobalProvider } from "./context/global-context";
 import { Locomotion } from "./components/Locomotion"; // 👈 đường dẫn đến file mới
