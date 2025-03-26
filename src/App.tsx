@@ -1,13 +1,12 @@
+import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { GlobalProvider } from "./context/global-context";
 import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
-import { createXRStore, XR } from "@react-three/xr";
+import { XR, createXRStore } from "@react-three/xr";
+import { GlobalProvider } from "./context/global-context";
+import { PlayerController } from "./components/playerRig"; // đường dẫn đúng
 
-const xrStore = createXRStore({
-  controller: {
-    
-  },
-});
+// Tạo XR store
+export const xrStore = createXRStore({});
 
 export default function App() {
   return (
@@ -20,12 +19,15 @@ export default function App() {
             position: "fixed",
           }}
         >
-          <color args={[0x808080]} attach={"background"} />
+          <color args={[0x808080]} attach="background" />
           <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
           <Environment preset="warehouse" />
-          <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />
-          <XR store={xrStore} />
+          <Gltf src="/a_map_main_fix.glb" />
+          <XR store={xrStore}>
+            <PlayerController />
+          </XR>
         </Canvas>
+
         <div
           style={{
             position: "fixed",
