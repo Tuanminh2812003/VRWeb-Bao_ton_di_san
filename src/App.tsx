@@ -1,12 +1,27 @@
+import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Gltf } from "@react-three/drei";
+import { Gltf, useProgress } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { GlobalProvider } from "./context/global-context";
-import { Locomotion } from "./components/Locomotion"; // 👈 đường dẫn đến file mới
+import { Locomotion } from "./components/Locomotion";
 
 export const xrStore = createXRStore({});
 
+function GLTFScene({ onLoad }: { onLoad: () => void }) {
+  const { progress } = useProgress();
+
+  React.useEffect(() => {
+    if (progress === 100) {
+      onLoad();
+    }
+  }, [progress, onLoad]);
+
+  return <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />;
+}
+
 export default function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <GlobalProvider>
       <>
@@ -20,8 +35,10 @@ export default function App() {
           <color args={[0x808080]} attach="background" />
           <XR store={xrStore}>
             <ambientLight />
-            <Locomotion />
-            <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />
+            {isLoaded && <Locomotion />}
+            <Suspense fallback={null}>
+              <GLTFScene onLoad={() => setIsLoaded(true)} />
+            </Suspense>
           </XR>
         </Canvas>
 
