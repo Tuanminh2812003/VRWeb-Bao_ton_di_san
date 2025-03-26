@@ -21,7 +21,7 @@ export default function App() {
           <XR store={xrStore}>
             <ambientLight />
             <Locomotion />
-            <Gltf src="/a_map_main_fix.glb" />
+            <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />
           </XR>
         </Canvas>
 
