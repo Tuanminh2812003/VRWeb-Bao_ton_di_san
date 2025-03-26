@@ -1,9 +1,10 @@
+import React from "react";
 import { useXR } from "@react-three/xr";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export function PlayerController() {
+export function PlayerController({ children }: { children?: React.ReactNode }) {
   const controllers = (useXR() as any).controllers;
   const groupRef = useRef<THREE.Group>(null);
 
@@ -12,7 +13,6 @@ export function PlayerController() {
     if (!controller?.inputSource?.gamepad || !groupRef.current) return;
 
     const [xAxis, yAxis] = controller.inputSource.gamepad.axes.slice(2, 4);
-    console.log("Joystick:", { xAxis, yAxis }); // 👈 thêm dòng này
     const speed = 0.05;
 
     const direction = new THREE.Vector3();
@@ -28,5 +28,5 @@ export function PlayerController() {
     groupRef.current.position.add(moveVector);
   });
 
-  return <group ref={groupRef} />;
+  return <group ref={groupRef}>{children}</group>;
 }

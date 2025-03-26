@@ -23,7 +23,9 @@ export default function App() {
           <Environment preset="warehouse" />
           <Gltf src="/a_map_main_fix.glb" />
           <XR store={xrStore}>
-            <PlayerController />
+            <PlayerController>
+              <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
+            </PlayerController>
           </XR>
         </Canvas>
 
