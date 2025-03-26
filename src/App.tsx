@@ -1,4 +1,3 @@
-import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";

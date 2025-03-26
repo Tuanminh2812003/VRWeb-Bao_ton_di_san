@@ -2,7 +2,6 @@ import { useXR } from "@react-three/xr";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
-import React from "react";
 
 export function PlayerController() {
   const controllers = (useXR() as any).controllers;
