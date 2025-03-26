@@ -1,10 +1,9 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
+import { Environment, Gltf } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { GlobalProvider } from "./context/global-context";
-import { PlayerController } from "./components/playerRig"; // đường dẫn đúng
+import { Locomotion } from "./components/Locomotion"; // 👈 đường dẫn đến file mới
 
-// Tạo XR store
 export const xrStore = createXRStore({});
 
 export default function App() {
@@ -19,39 +18,31 @@ export default function App() {
           }}
         >
           <color args={[0x808080]} attach="background" />
-          <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
-          <Environment preset="warehouse" />
-          <Gltf src="/a_map_main_fix.glb" />
           <XR store={xrStore}>
-            <PlayerController>
-              <PerspectiveCamera makeDefault position={[30, 1.6, 2]} fov={75} />
-            </PlayerController>
+            <ambientLight />
+            <Locomotion />
+            <Gltf src="/a_map_main_fix.glb" />
           </XR>
         </Canvas>
 
         <div
           style={{
             position: "fixed",
-            display: "flex",
             width: "100vw",
             height: "100vh",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            pointerEvents: "none",
           }}
         >
           <button
             style={{
-              position: "fixed",
-              bottom: "20px",
-              left: "50%",
-              transform: "translateX(-50%)",
+              marginBottom: "20px",
               fontSize: "20px",
+              pointerEvents: "auto",
             }}
-            onClick={() => {
-              xrStore.enterVR();
-            }}
+            onClick={() => xrStore.enterVR()}
           >
             Enter VR
           </button>
