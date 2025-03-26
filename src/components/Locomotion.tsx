@@ -1,11 +1,12 @@
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useXRInputSourceState, XROrigin } from "@react-three/xr";
 import * as THREE from "three";
 
 export function Locomotion() {
   const controller = useXRInputSourceState("controller", "right");
   const ref = useRef<THREE.Group>(null);
+  const { camera } = useThree(); // 👈 lấy camera để dùng quaternion
 
   useFrame((_, delta) => {
     if (!ref.current || !controller?.gamepad) return;
@@ -15,11 +16,11 @@ export function Locomotion() {
 
     const speed = 2.5;
     const moveX = (thumbstick.xAxis ?? 0) * delta * speed;
-    const moveZ = (thumbstick.yAxis ?? 0) * delta * speed;
+    const moveZ = -(thumbstick.yAxis ?? 0) * delta * speed
 
-    // Lấy hướng nhìn từ quaternion của camera trong XROrigin
+    // 👉 Lấy hướng nhìn từ camera
     const direction = new THREE.Vector3(0, 0, -1);
-    direction.applyQuaternion(ref.current.quaternion);
+    direction.applyQuaternion(camera.quaternion); // 👈 dùng hướng nhìn của người dùng
     direction.y = 0;
     direction.normalize();
 
