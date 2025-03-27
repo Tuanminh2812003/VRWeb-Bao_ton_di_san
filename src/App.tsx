@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Gltf, useProgress } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
@@ -58,7 +58,7 @@ export default function App() {
         {/* Background audio */}
         <audio
           ref={audioRef}
-          src="/kg.mp3" // ✅ Thay bằng link âm thanh của bạn
+          src="/kgchinh.mp3" // ✅ Thay bằng link âm thanh của bạn
           loop
           autoPlay
           style={{ display: "none" }}
