@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect, useRef } from "react";
+import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Gltf, useProgress } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
@@ -10,30 +10,17 @@ export const xrStore = createXRStore({});
 function GLTFScene({ onLoad }: { onLoad: () => void }) {
   const { progress } = useProgress();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (progress === 100) {
       onLoad();
     }
   }, [progress, onLoad]);
 
-  return <Gltf src="/VBaoTang_2_main_bake_clean_map.glb" />;
+  return <Gltf src="/BaoTang_2_main_bake_clean_map.glb" />;
 }
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    if (isLoaded && audioRef.current) {
-      const playPromise = audioRef.current.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn("Autoplay bị chặn bởi trình duyệt:", error);
-        });
-      }
-    }
-  }, [isLoaded]);
 
   return (
     <GlobalProvider>
@@ -55,16 +42,6 @@ export default function App() {
           </XR>
         </Canvas>
 
-        {/* Background audio */}
-        <audio
-          ref={audioRef}
-          src="/kgchinh.mp3" // ✅ Thay bằng link âm thanh của bạn
-          loop
-          autoPlay
-          style={{ display: "none" }}
-        />
-
-        {/* Nút Enter VR */}
         <div
           style={{
             position: "fixed",
