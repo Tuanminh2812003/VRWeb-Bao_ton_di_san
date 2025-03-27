@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Gltf, useProgress } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
@@ -21,6 +21,19 @@ function GLTFScene({ onLoad }: { onLoad: () => void }) {
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (isLoaded && audioRef.current) {
+      const playPromise = audioRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn("Autoplay bị chặn bởi trình duyệt:", error);
+        });
+      }
+    }
+  }, [isLoaded]);
 
   return (
     <GlobalProvider>
@@ -41,6 +54,14 @@ export default function App() {
             </Suspense>
           </XR>
         </Canvas>
+
+        <audio
+          ref={audioRef}
+          src="/kgchinh.mp3" // ✅ Thay bằng link âm thanh của bạn
+          loop
+          autoPlay
+          style={{ display: "none" }}
+        />
 
         <div
           style={{
