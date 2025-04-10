@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useXRInputSourceState, XROrigin } from "@react-three/xr";
 import * as THREE from "three";
@@ -7,6 +7,13 @@ export function Locomotion() {
   const controller = useXRInputSourceState("controller", "right");
   const ref = useRef<THREE.Group>(null);
   const { camera } = useThree();
+
+  // ✅ Thiết lập chiều cao ban đầu
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.position.y = 0.7;
+    }
+  }, []);
 
   useFrame((_, delta) => {
     if (!ref.current || !controller?.gamepad) return;
