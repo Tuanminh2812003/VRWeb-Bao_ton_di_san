@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useRef, useMemo } from "react";
+import { Suspense, useState, useEffect, useRef, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { XR, createXRStore } from "@react-three/xr";
 import { GlobalProvider } from "../../context/global-context";
