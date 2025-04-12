@@ -376,6 +376,8 @@ export default function HomeXR() {
               onClick={({ position, lookAt }) => {
                 setPopupVisible(true);
                 setPopupContent(m.info || "Không có thông tin.");
+
+                console.log(position);
               
                 // Mặc định nếu không có lookAtNum thì không cộng thêm gì cả
                 const offset = m.lookAtNum ?? [0, 0, 0];
