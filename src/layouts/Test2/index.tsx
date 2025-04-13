@@ -332,7 +332,7 @@ export default function HomeXR() {
       },
       {
         path: "/vietnam_war_bottle.glb",
-        position: [-3.6, 1.2, -7],
+        position: [-3.6, 1.1, -7],
         rotation: [0, -60, 0],
         scale: [1, 1, 1],
         clickable: true,
@@ -341,12 +341,12 @@ export default function HomeXR() {
       },
       {
         path: "/bread_vietnam.glb",
-        position: [-5.5, -3.2, -3],
+        position: [-5.5, 0, -3],
         rotation: [0, -60, 0],
-        scale: [25, 25, 25],
+        scale: [1, 1, 1],
         clickable: true,
         info: "Giỏ bánh mì và nón lá – Hình ảnh quen thuộc trong đời sống thường nhật của người Việt. Bánh mì giòn vàng – món ăn đường phố phổ biến, kết hợp với chiếc nón lá mang đậm bản sắc văn hóa dân tộc, gợi nhớ đến hình ảnh những gánh hàng rong giản dị, mộc mạc.",
-        lookAtNum: [0,25,0]
+        lookAtNum: [1, 2,0]
       },
     ],
     []
