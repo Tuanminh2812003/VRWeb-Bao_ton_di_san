@@ -11,9 +11,10 @@ interface PictureModelProps {
   onClick?: (data: { position: THREE.Vector3; lookAt: THREE.Vector3 }) => void;
   onLoad?: () => void;
   clickable?: boolean;
+  grabbable?: boolean;
 }
 
-export default function PictureModel({ path, position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], clickable = true, onClick, onLoad }: PictureModelProps) {
+export default function PictureModel({ path, position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], clickable = true, grabbable = false, onClick, onLoad }: PictureModelProps) {
   const gltf = useLoader(GLTFLoader, path);
   const model = useMemo(() => gltf.scene.clone(true), [gltf]);
   const ref = useRef<THREE.Group>(null);
@@ -25,6 +26,9 @@ export default function PictureModel({ path, position = [0, 0, 0], rotation = [0
         child.receiveShadow = true;
         if (clickable) {
           child.userData.clickable = true;
+        }
+        if (grabbable) {
+          child.userData.grabbable = true; // ✅ thêm dòng này
         }
       }
     });
